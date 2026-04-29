@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f3f4f6;
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body {
+    background-color: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide sidebar and preview controls */
+  aside,
+  .preview-controls {
+    display: none !important;
+  }
+
+  /* Make main content full width */
+  main {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  /* Remove padding from preview container */
+  .preview-container {
+    padding: 0 !important;
+    display: block !important;
+    justify-content: unset !important;
+  }
+
+  /* Remove transform scaling in print */
+  .preview-inner {
+    transform: none !important;
+  }
+
+  /* Resume page styling */
+  .resume-page {
+    box-shadow: none !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 auto !important;
+  }
+
+  /* Page break handling */
+  .resume-section {
+    page-break-inside: avoid;
+  }
+}
