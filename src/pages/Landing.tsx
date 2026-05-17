@@ -214,7 +214,7 @@ function HeroSection() {
         style={{ perspective: '1200px' }}
       >
         <img
-          src="./hero-editor-screenshot.png"
+          src={`${import.meta.env.BASE_URL}hero-editor-screenshot.png`}
           alt="ResuMe 编辑器工作区预览"
           className="w-full rounded-xl shadow-lg"
           style={{ transform: 'rotateX(2deg)' }}
@@ -280,7 +280,7 @@ function FeaturesSection() {
           icon={<Pencil className="w-[22px] h-[22px] text-themeaccent" />}
           title="极简模板"
           description="8 款精心设计的日式极简模板，每一款都经过排版推敲，让你的简历在简洁中展现专业。"
-          image="./feature-template-preview.png"
+          image={`${import.meta.env.BASE_URL}feature-template-preview.png`}
         />
         <FeatureCard
           icon={<Eye className="w-[22px] h-[22px] text-themeaccent" />}
