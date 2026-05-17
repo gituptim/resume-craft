@@ -2,6 +2,7 @@
 
 一个纯前端的个人简历生成器。左侧编辑内容、选择模板，右侧实时预览，支持一键导出 PDF。
 
+**主页预览**: https://gituptim.github.io/resume-craft/#welcome
 **在线预览**: https://gituptim.github.io/resume-craft/
 
 ## 功能特性
