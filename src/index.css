@@ -1,61 +1,234 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+JP:wght@400;600&display=swap');
 
-@theme {
-  --font-sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  font-family: var(--font-sans);
-  background-color: #f3f4f6;
-}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
-@media print {
-  @page {
-    margin: 0;
-    size: auto;
+    --paper: #FAF8F5;
+    --surface: #FFFFFF;
+    --surface-highlight: #F5F2EE;
+    --ink-primary: #1C1917;
+    --ink-secondary: #78716C;
+    --ink-tertiary: #A8A29E;
+    --ink-minimal: #D6D3D1;
+    --accent-color: #B45309;
+    --accent-light: #FEF3C7;
+    --accent-hover: #92400E;
+    --success: #16A34A;
+    --danger: #DC2626;
+    --danger-bg: #FEF2F2;
+    --divider: #E7E5E4;
+    --divider-faint: #F0EEEB;
+    --shadow-sm: 0 1px 2px rgba(28,25,23,0.04);
+    --shadow-md: 0 4px 12px rgba(28,25,23,0.06);
+    --shadow-lg: 0 12px 40px rgba(28,25,23,0.08);
+    --shadow-glow: 0 0 0 3px rgba(180,83,9,0.12);
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: white;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-family: "Noto Sans SC", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #FAF8F5;
+    color: #1C1917;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer base {
+  @media print {
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: white !important;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    /* Hide UI chrome */
+    .no-print,
+    .topbar,
+    .sidebar-nav,
+    .editor-sidebar,
+    .drawer-backdrop,
+    .section-drawer,
+    .template-modal,
+    .modal-backdrop,
+    .add-section-btn,
+    .floating-actions,
+    .floating-template-switch {
+      display: none !important;
+    }
+
+    .print-only {
+      display: block !important;
+    }
+
+    /* Preview pane becomes a seamless white canvas */
+    .preview-pane {
+      background: white !important;
+      overflow: visible !important;
+      height: auto !important;
+      padding: 0 !important;
+    }
+
+    /* Paper styling – remove shadows / rounded corners */
+    .a4-paper {
+      box-shadow: none !important;
+      margin: 0 !important;
+      max-width: none !important;
+      width: 210mm !important;
+      border-radius: 0 !important;
+      transform: none !important;
+    }
+
+    /* Each A4 page is at least one full page tall */
+    .a4-paper {
+      min-height: 297mm !important;
+    }
+
+    /* Reset content padding for print */
+    .a4-content {
+      padding: 0 !important;
+    }
+
+    /* Hide visual page-break hints */
+    .page-break-hint {
+      display: none !important;
+    }
+
+    /* Prevent awkward breaks inside resume sections */
+    .a4-content > div,
+    .a4-content section,
+    .a4-content article {
+      page-break-inside: avoid;
+    }
+
+    /* Ensure headings don't get orphaned */
+    .a4-content h1,
+    .a4-content h2,
+    .a4-content h3 {
+      page-break-after: avoid;
+    }
+  }
+}
+
+@layer utilities {
+  .print-only {
+    display: none;
   }
 
-  /* Hide sidebar and preview controls */
-  aside,
-  .preview-controls {
-    display: none !important;
+  .text-hero {
+    font-size: 2.5rem;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
-  /* Make main content full width */
-  main {
-    width: 100% !important;
-    max-width: none !important;
-    overflow: visible !important;
+  .text-display {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
-  /* Remove padding from preview container */
-  .preview-container {
-    padding: 0 !important;
-    display: block !important;
-    justify-content: unset !important;
+  .text-headline {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0;
   }
 
-  /* Remove transform scaling in print */
-  .preview-inner {
-    transform: none !important;
+  .text-body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    font-weight: 400;
   }
 
-  /* Resume page styling */
-  .resume-page {
-    box-shadow: none !important;
-    width: 210mm !important;
-    min-height: 297mm !important;
-    margin: 0 auto !important;
+  .text-small {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
-  /* Page break handling */
-  .resume-section {
-    page-break-inside: avoid;
+  .text-micro {
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.03em;
   }
 }

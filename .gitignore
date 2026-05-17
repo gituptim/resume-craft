@@ -44,3 +44,12 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Cache
+.eslintcache
+.cache/
+.vite/
+coverage/
+
+# TypeScript
+*.tsbuildinfo

@@ -1,3 +1,9 @@
+export type PersonalCustomField = {
+  id: string
+  label: string
+  value: string
+}
+
 export type PersonalInfo = {
   name: string
   title: string
@@ -5,6 +11,7 @@ export type PersonalInfo = {
   phone: string
   location: string
   website?: string
+  customFields: PersonalCustomField[]
 }
 
 export type Experience = {
@@ -31,6 +38,22 @@ export type Project = {
   link?: string
 }
 
+export type Award = {
+  id: string
+  name: string
+  issuer: string
+  date: string
+  description?: string
+}
+
+export type SkillItem = {
+  id: string
+  name: string
+  description: string
+  level: number // 1-5
+  showLevel: boolean
+}
+
 export type CustomSectionItem = {
   id: string
   title: string
@@ -46,7 +69,14 @@ export type CustomSection = {
   items: CustomSectionItem[]
 }
 
-export type BuiltInSectionType = 'summary' | 'experience' | 'education' | 'skills' | 'projects'
+export type LayoutSettings = {
+  sectionSpacing: number // mm, range 4-16
+  bodyFontSize: number   // pt, range 8-13
+  headingFontSize: number // pt, range 10-16
+  fontFamily: 'noto-serif' | 'noto-sans' | 'system'
+}
+
+export type BuiltInSectionType = 'summary' | 'experience' | 'education' | 'skills' | 'projects' | 'awards'
 
 export type SectionOrderItem =
   | { type: 'builtin'; sectionType: BuiltInSectionType }
@@ -57,37 +87,26 @@ export type ResumeData = {
   summary: string
   experience: Experience[]
   education: Education[]
-  skills: string[]
+  skills: SkillItem[]
   projects: Project[]
+  awards: Award[]
   customSections: CustomSection[]
   sectionOrder: SectionOrderItem[]
-  sectionTitles: Partial<Record<BuiltInSectionType, string>>
+  layout: LayoutSettings
+  color?: string
+  skillDisplayMode: 'simple' | 'detailed'
+  skillsMarkdown?: string
 }
 
-export type TemplateId = 'minimal' | 'modern' | 'classic' | 'creative'
+export type TemplateType = 'classic' | 'modern' | 'minimal' | 'creative' | 'elegant' | 'tech' | 'timeline' | 'compact'
 
-export type ResumeAction =
-  | { type: 'UPDATE_PERSONAL'; payload: Partial<PersonalInfo> }
-  | { type: 'UPDATE_SUMMARY'; payload: string }
-  | { type: 'ADD_EXPERIENCE' }
-  | { type: 'UPDATE_EXPERIENCE'; id: string; payload: Partial<Experience> }
-  | { type: 'REMOVE_EXPERIENCE'; id: string }
-  | { type: 'ADD_EDUCATION' }
-  | { type: 'UPDATE_EDUCATION'; id: string; payload: Partial<Education> }
-  | { type: 'REMOVE_EDUCATION'; id: string }
-  | { type: 'ADD_PROJECT' }
-  | { type: 'UPDATE_PROJECT'; id: string; payload: Partial<Project> }
-  | { type: 'REMOVE_PROJECT'; id: string }
-  | { type: 'ADD_SKILL'; payload: string }
-  | { type: 'REMOVE_SKILL'; payload: string }
-  | { type: 'SET_TEMPLATE'; payload: TemplateId }
-  | { type: 'UPDATE_SECTION_TITLE'; sectionType: BuiltInSectionType; title: string }
-  | { type: 'REORDER_SECTIONS'; payload: SectionOrderItem[] }
-  | { type: 'ADD_CUSTOM_SECTION' }
-  | { type: 'UPDATE_CUSTOM_SECTION'; id: string; payload: Partial<Pick<CustomSection, 'title'>> }
-  | { type: 'REMOVE_CUSTOM_SECTION'; id: string }
-  | { type: 'ADD_CUSTOM_ITEM'; sectionId: string }
-  | { type: 'UPDATE_CUSTOM_ITEM'; sectionId: string; itemId: string; payload: Partial<CustomSectionItem> }
-  | { type: 'REMOVE_CUSTOM_ITEM'; sectionId: string; itemId: string }
-  | { type: 'RESET' }
-  | { type: 'CLEAR' }
+export const TEMPLATE_NAMES: Record<TemplateType, string> = {
+  classic: '经典商务',
+  modern: '现代简约',
+  minimal: '极简留白',
+  creative: '创意个性',
+  elegant: '优雅学术',
+  tech: '科技现代',
+  timeline: '时间轨迹',
+  compact: '紧凑高效',
+}
